@@ -128,10 +128,10 @@ export default function ContactPage() {
               <div className="rounded-3xl bg-navy-900 p-8 text-white">
                 <h3 className="text-lg font-bold text-white">Contact Information</h3>
                 <div className="mt-6 space-y-5">
-                  <ContactRow icon={Phone} label="Phone" value="+1 800 555 1234" href="tel:+18005551234" />
+                  <ContactRow icon={Phone} label="Phone" value="+92 343 2858901" href="tel:+92 343 2858901" />
                   <ContactRow icon={Mail} label="Email" value="info@leveragercm.com" href="mailto:info@leveragercm.com" />
                   <ContactRow icon={Clock} label="Business Hours" value="Mon–Fri: 8am–8pm · 24/7 Support Available" />
-                  <ContactRow icon={MapPin} label="Offices" value="USA & UK Operations" />
+                  <ContactRow icon={MapPin} label="Offices" value="437G, G Block, Johar town Lahore" />
                 </div>
               </div>
             </Reveal>
@@ -154,15 +154,19 @@ export default function ContactPage() {
               </div>
             </Reveal>
 
-            {/* Map placeholder */}
+            {/* Google Map */}
             <Reveal delay={0.2}>
-              <div className="relative h-56 overflow-hidden rounded-3xl bg-gradient-to-br from-primary-600 to-accent-500 ring-1 ring-slatey-200/70">
-                <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-20" />
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-                  <MapPin className="h-10 w-10" />
-                  <p className="mt-2 text-sm font-semibold">USA & UK Operations</p>
-                  <p className="text-xs text-white/80">Serving providers worldwide</p>
-                </div>
+              <div className="overflow-hidden rounded-3xl ring-1 ring-slatey-200/70 shadow-premium">
+                <iframe
+                  title="LeverageRCM Office Location"
+                  src="https://www.google.com/maps?q=437G%2C%20G%20Block%2C%20Johar%20Town%2C%20Lahore%2C%20Pakistan&output=embed"
+                  width="100%"
+                  height="300"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
               </div>
             </Reveal>
           </div>

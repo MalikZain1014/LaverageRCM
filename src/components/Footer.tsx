@@ -82,14 +82,14 @@ export default function Footer() {
               across the USA and UK maximize revenue through accurate billing, coding, and complete RCM services.
             </p>
             <div className="mt-6 space-y-2.5 text-sm">
-              <a href="tel:+18005551234" className="flex items-center gap-3 text-slatey-400 hover:text-white transition-colors">
-                <Phone className="h-4 w-4 text-primary-500" /> +1 800 555 1234
+              <a href="tel:+92 343 2858901" className="flex items-center gap-3 text-slatey-400 hover:text-white transition-colors">
+                <Phone className="h-4 w-4 text-primary-500" /> +92 343 2858901
               </a>
               <a href="mailto:info@leveragercm.com" className="flex items-center gap-3 text-slatey-400 hover:text-white transition-colors">
                 <Mail className="h-4 w-4 text-primary-500" /> info@leveragercm.com
               </a>
               <div className="flex items-center gap-3 text-slatey-400">
-                <MapPin className="h-4 w-4 text-primary-500" /> USA & UK Operations
+                <MapPin className="h-4 w-4 text-primary-500" /> 437G, G Block, Johar town Lahore
               </div>
             </div>
             <div className="mt-6 flex gap-3">

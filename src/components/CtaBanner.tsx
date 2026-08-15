@@ -56,10 +56,10 @@ export default function CtaBanner({
               {primaryLabel} <ArrowRight className="h-4 w-4" />
             </Link>
             <a
-              href="tel:+18005551234"
+              href="tel:+92 343 2858901"
               className="btn bg-white/10 text-white ring-1 ring-white/20 hover:bg-white/20 px-7 py-3.5 text-base"
             >
-              <Phone className="h-4 w-4" /> +1 800 555 1234
+              <Phone className="h-4 w-4" /> +92 343 2858901
             </a>
           </motion.div>
         </div>

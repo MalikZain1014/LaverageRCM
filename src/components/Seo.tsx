@@ -8,7 +8,7 @@ const ORG_SCHEMA = {
   description:
     'Medical billing and revenue cycle management company serving healthcare providers across the USA and UK.',
   areaServed: ['United States', 'United Kingdom'],
-  telephone: '+1-800-555-1234',
+  telephone: '+92 343 2858901',
 };
 
 interface SeoProps {

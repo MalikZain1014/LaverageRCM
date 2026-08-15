@@ -57,7 +57,7 @@ export default function Navbar() {
           : 'bg-transparent'
       }`}
     >
-      <nav className="container-px flex h-20 items-center justify-between gap-4">
+      <nav className="container-px flex h-20 items-center justify-between">
         <Logo dark={solid} />
 
         {/* Desktop nav */}
@@ -146,7 +146,7 @@ export default function Navbar() {
         {/* Right side */}
         <div className="hidden lg:flex items-center gap-4">
           <a
-            href="tel:+18005551234"
+            href="tel:+92 343 2858901"
             className={`flex items-center gap-2 text-sm font-semibold transition-colors ${
               solid ? 'text-slatey-700 hover:text-primary-700' : 'text-white hover:text-accent-300'
             }`}
@@ -154,7 +154,7 @@ export default function Navbar() {
             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary-600 text-white">
               <Phone className="h-4 w-4" />
             </span>
-            +1 800 555 1234
+            +92 343 2858901
           </a>
           <Link to="/contact" className="btn-primary">
             Get Free Consultation
@@ -217,11 +217,11 @@ export default function Navbar() {
 
               <div className="pt-4 space-y-3">
                 <a
-                  href="tel:+18005551234"
+                  href="tel:+92 343 2858901"
                   className="flex items-center justify-center gap-2 rounded-full bg-primary-50 px-4 py-3 text-sm font-semibold text-primary-700"
                 >
                   <Phone className="h-4 w-4" />
-                  +1 800 555 1234
+                  +92 343 2858901
                 </a>
                 <Link to="/contact" className="btn-primary w-full">
                   Get Free Consultation
