@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .admin-root {
+    @apply min-h-screen bg-slatey-100 text-slatey-800;
+  }
+  .dark .admin-root {
+    @apply bg-navy-900 text-slatey-200;
+  }
+  .admin-card {
+    @apply rounded-2xl bg-white shadow-premium ring-1 ring-slatey-200/70;
+  }
+  .dark .admin-card {
+    @apply bg-navy-800 ring-white/10;
+  }
+  .admin-input {
+    @apply w-full rounded-xl border border-slatey-200 bg-white px-4 py-2.5 text-sm text-slatey-800 shadow-sm transition-colors focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20;
+  }
+  .dark .admin-input {
+    @apply border-white/10 bg-navy-700 text-slatey-100 placeholder:text-slatey-500;
+  }
+  .admin-label {
+    @apply mb-1.5 block text-sm font-semibold text-slatey-700;
+  }
+  .dark .admin-label {
+    @apply text-slatey-300;
+  }
+  .admin-th {
+    @apply px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-slatey-500;
+  }
+  .dark .admin-th {
+    @apply text-slatey-400;
+  }
+  .admin-td {
+    @apply px-4 py-3.5 text-sm text-slatey-700;
+  }
+  .dark .admin-td {
+    @apply text-slatey-300;
+  }
+  .admin-row {
+    @apply border-t border-slatey-100 transition-colors hover:bg-slatey-50;
+  }
+  .dark .admin-row {
+    @apply border-white/5 hover:bg-navy-700;
+  }
+}
+
+/* React Quill dark mode */
+.dark .ql-toolbar {
+  border-color: rgba(255,255,255,0.1) !important;
+  background: #0a2242;
+}
+.dark .ql-container {
+  border-color: rgba(255,255,255,0.1) !important;
+}
+.dark .ql-editor {
+  color: #e2e8f0;
+}
+.dark .ql-snow .ql-stroke { stroke: #94a3b8 !important; }
+.dark .ql-snow .ql-fill { fill: #94a3b8 !important; }
