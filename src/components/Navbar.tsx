@@ -23,25 +23,32 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileSection, setMobileSection] = useState<string | null>(null);
+  const [mobileSection, setMobileSection] = useState<
+    'services' | 'specialties' | null
+  >(null);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [specialtiesOpen, setSpecialtiesOpen] = useState(false);
+
   const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
+
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
+    // Close mobile menu when route changes
     setMobileOpen(false);
     setMobileSection(null);
   }, [location.pathname]);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : '';
+
     return () => {
       document.body.style.overflow = '';
     };
@@ -51,16 +58,17 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-[100] transition-all duration-300 ${
         solid
           ? 'bg-white/90 backdrop-blur-xl shadow-premium border-b border-slatey-200/60'
           : 'bg-transparent'
       }`}
     >
       <nav className="container-px flex h-20 items-center justify-between">
+        {/* Logo */}
         <Logo dark={solid} />
 
-        {/* Desktop nav */}
+        {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center gap-1">
           <NavItem to="/" label="Home" dark={solid} />
 
@@ -90,10 +98,12 @@ export default function Navbar() {
                   <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary-100 text-primary-700 group-hover:bg-primary-600 group-hover:text-white transition-colors">
                     <s.icon className="h-4.5 w-4.5" strokeWidth={2} />
                   </span>
+
                   <span>
                     <span className="block text-sm font-semibold text-slatey-800 group-hover:text-primary-700">
                       {s.title}
                     </span>
+
                     <span className="block text-xs text-slatey-500 line-clamp-1">
                       {s.short}
                     </span>
@@ -128,6 +138,7 @@ export default function Navbar() {
                   {s.name}
                 </Link>
               ))}
+
               <Link
                 to="/specialties"
                 className="flex items-center gap-2 rounded-lg bg-slatey-50 px-3 py-2 text-sm font-semibold text-primary-700 hover:bg-primary-50 transition-colors"
@@ -138,42 +149,62 @@ export default function Navbar() {
             </div>
           </Dropdown>
 
-          <NavItem to="/why-choose-us" label="Why Choose Us" dark={solid} />
+          <NavItem
+            to="/why-choose-us"
+            label="Why Choose Us"
+            dark={solid}
+          />
+
           <NavItem to="/blog" label="Blog" dark={solid} />
+
           <NavItem to="/faq" label="FAQ" dark={solid} />
         </div>
 
-        {/* Right side */}
+        {/* Desktop Right Side */}
         <div className="hidden lg:flex items-center gap-4">
           <a
             href="tel:+92 343 2858901"
             className={`flex items-center gap-2 text-sm font-semibold transition-colors ${
-              solid ? 'text-slatey-700 hover:text-primary-700' : 'text-white hover:text-accent-300'
+              solid
+                ? 'text-slatey-700 hover:text-primary-700'
+                : 'text-white hover:text-accent-300'
             }`}
           >
             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary-600 text-white">
               <Phone className="h-4 w-4" />
             </span>
+
             +92 343 2858901
           </a>
+
           <Link to="/contact" className="btn-primary">
             Get Free Consultation
           </Link>
         </div>
 
-        {/* Mobile toggle */}
+        {/* Mobile Toggle */}
         <button
+          type="button"
           className={`lg:hidden flex h-11 w-11 items-center justify-center rounded-xl transition-colors ${
-            solid ? 'text-slatey-800 hover:bg-slatey-100' : 'text-white hover:bg-white/10'
+            solid
+              ? 'text-slatey-800 hover:bg-slatey-100'
+              : 'text-white hover:bg-white/10'
           }`}
-          onClick={() => setMobileOpen((v) => !v)}
+          onClick={() => {
+            setMobileOpen((v) => !v);
+          }}
           aria-label="Toggle menu"
+          aria-expanded={mobileOpen}
         >
-          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {mobileOpen ? (
+            <X className="h-6 w-6" />
+          ) : (
+            <Menu className="h-6 w-6" />
+          )}
         </button>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -181,40 +212,61 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="lg:hidden fixed inset-x-0 top-20 bottom-0 bg-white overflow-y-auto no-scrollbar"
+            className="lg:hidden absolute left-0 right-0 top-20 h-[calc(100vh-5rem)] bg-white overflow-y-auto no-scrollbar z-[100]"
           >
             <div className="container-px py-6 space-y-1">
               <MobileLink to="/" label="Home" />
+
               <MobileLink to="/about" label="About Us" />
 
+              {/* Services */}
               <MobileSection
                 label="Services"
                 open={mobileSection === 'services'}
                 onToggle={() =>
-                  setMobileSection((s) => (s === 'services' ? null : 'services'))
+                  setMobileSection((current) =>
+                    current === 'services' ? null : 'services'
+                  )
                 }
-                items={services.map((s) => ({ to: `/services/${s.slug}`, label: s.title }))}
+                items={services.map((s) => ({
+                  to: `/services/${s.slug}`,
+                  label: s.title,
+                }))}
               />
+
+              {/* Specialties */}
               <MobileSection
                 label="Specialties"
                 open={mobileSection === 'specialties'}
                 onToggle={() =>
-                  setMobileSection((s) => (s === 'specialties' ? null : 'specialties'))
+                  setMobileSection((current) =>
+                    current === 'specialties' ? null : 'specialties'
+                  )
                 }
                 items={[
                   ...specialties.slice(0, 12).map((s) => ({
                     to: `/specialties/${s.slug}`,
                     label: s.name,
                   })),
-                  { to: '/specialties', label: 'More Specialties' },
+                  {
+                    to: '/specialties',
+                    label: 'More Specialties',
+                  },
                 ]}
               />
 
-              <MobileLink to="/why-choose-us" label="Why Choose Us" />
+              <MobileLink
+                to="/why-choose-us"
+                label="Why Choose Us"
+              />
+
               <MobileLink to="/blog" label="Blog" />
+
               <MobileLink to="/faq" label="FAQ" />
+
               <MobileLink to="/contact" label="Contact" />
 
+              {/* Mobile Contact Buttons */}
               <div className="pt-4 space-y-3">
                 <a
                   href="tel:+92 343 2858901"
@@ -223,7 +275,11 @@ export default function Navbar() {
                   <Phone className="h-4 w-4" />
                   +92 343 2858901
                 </a>
-                <Link to="/contact" className="btn-primary w-full">
+
+                <Link
+                  to="/contact"
+                  className="btn-primary w-full"
+                >
                   Get Free Consultation
                 </Link>
               </div>
@@ -235,20 +291,47 @@ export default function Navbar() {
   );
 }
 
+/* =========================
+   Logo
+========================= */
+
 function Logo({ dark }: { dark: boolean }) {
   return (
-    <Link to="/" className="flex items-center gap-2.5 shrink-0">
+    <Link
+      to="/"
+      className="flex items-center gap-2.5 shrink-0"
+    >
       <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary-600 to-accent-500 text-white shadow-premium">
-        <Activity className="h-5 w-5" strokeWidth={2.5} />
+        <Activity
+          className="h-5 w-5"
+          strokeWidth={2.5}
+        />
       </span>
-      <span className={`text-lg font-extrabold tracking-tight ${dark ? 'text-navy-800' : 'text-white'}`}>
+
+      <span
+        className={`text-lg font-extrabold tracking-tight ${
+          dark ? 'text-navy-800' : 'text-white'
+        }`}
+      >
         Leverage<span className="text-primary-600">RCM</span>
       </span>
     </Link>
   );
 }
 
-function NavItem({ to, label, dark }: { to: string; label: string; dark: boolean }) {
+/* =========================
+   Desktop Nav Item
+========================= */
+
+function NavItem({
+  to,
+  label,
+  dark,
+}: {
+  to: string;
+  label: string;
+  dark: boolean;
+}) {
   return (
     <NavLink
       to={to}
@@ -267,6 +350,10 @@ function NavItem({ to, label, dark }: { to: string; label: string; dark: boolean
   );
 }
 
+/* =========================
+   Desktop Dropdown
+========================= */
+
 interface DropdownProps {
   label: string;
   dark: boolean;
@@ -277,7 +364,15 @@ interface DropdownProps {
   children: React.ReactNode;
 }
 
-function Dropdown({ label, dark, open, onToggle, onHover, onLeave, children }: DropdownProps) {
+function Dropdown({
+  label,
+  dark,
+  open,
+  onToggle,
+  onHover,
+  onLeave,
+  children,
+}: DropdownProps) {
   return (
     <div
       className="relative"
@@ -285,26 +380,47 @@ function Dropdown({ label, dark, open, onToggle, onHover, onLeave, children }: D
       onMouseLeave={onLeave}
     >
       <button
+        type="button"
         onClick={onToggle}
         className={`flex items-center gap-1 px-3.5 py-2 text-sm font-semibold transition-colors ${
-          dark ? 'text-slatey-700 hover:text-primary-700' : 'text-white/90 hover:text-white'
+          dark
+            ? 'text-slatey-700 hover:text-primary-700'
+            : 'text-white/90 hover:text-white'
         }`}
       >
         {label}
+
         <ChevronDown
-          className={`h-4 w-4 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          className={`h-4 w-4 transition-transform duration-200 ${
+            open ? 'rotate-180' : ''
+          }`}
         />
       </button>
+
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 8, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.98 }}
+            initial={{
+              opacity: 0,
+              y: 8,
+              scale: 0.98,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              y: 8,
+              scale: 0.98,
+            }}
             transition={{ duration: 0.18 }}
-            className="absolute left-1/2 top-full -translate-x-1/2 pt-2"
+            className="absolute left-1/2 top-full -translate-x-1/2 pt-2 z-[100]"
           >
-            <div className="card rounded-2xl shadow-premium-lg overflow-hidden">{children}</div>
+            <div className="card rounded-2xl shadow-premium-lg overflow-hidden">
+              {children}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -312,7 +428,17 @@ function Dropdown({ label, dark, open, onToggle, onHover, onLeave, children }: D
   );
 }
 
-function MobileLink({ to, label }: { to: string; label: string }) {
+/* =========================
+   Mobile Link
+========================= */
+
+function MobileLink({
+  to,
+  label,
+}: {
+  to: string;
+  label: string;
+}) {
   return (
     <NavLink
       to={to}
@@ -329,6 +455,10 @@ function MobileLink({ to, label }: { to: string; label: string }) {
   );
 }
 
+/* =========================
+   Mobile Dropdown Section
+========================= */
+
 function MobileSection({
   label,
   open,
@@ -338,25 +468,43 @@ function MobileSection({
   label: string;
   open: boolean;
   onToggle: () => void;
-  items: { to: string; label: string }[];
+  items: {
+    to: string;
+    label: string;
+  }[];
 }) {
   return (
     <div>
       <button
+        type="button"
         onClick={onToggle}
         className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-base font-semibold text-slatey-800 hover:bg-slatey-50"
+        aria-expanded={open}
       >
         {label}
+
         <ChevronDown
-          className={`h-5 w-5 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          className={`h-5 w-5 transition-transform duration-200 ${
+            open ? 'rotate-180' : ''
+          }`}
         />
       </button>
-      <AnimatePresence>
+
+      <AnimatePresence initial={false}>
         {open && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
+            initial={{
+              height: 0,
+              opacity: 0,
+            }}
+            animate={{
+              height: 'auto',
+              opacity: 1,
+            }}
+            exit={{
+              height: 0,
+              opacity: 0,
+            }}
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >

@@ -154,12 +154,11 @@ export default function ContactPage() {
               </div>
             </Reveal>
 
-            {/* Google Map */}
             <Reveal delay={0.2}>
               <div className="overflow-hidden rounded-3xl ring-1 ring-slatey-200/70 shadow-premium">
                 <iframe
-                  title="LeverageRCM Office Location"
-                  src="https://www.google.com/maps?q=437G%2C%20G%20Block%2C%20Johar%20Town%2C%20Lahore%2C%20Pakistan&output=embed"
+                  title="LeverageRCM Exact Office Location"
+                  src="https://www.google.com/maps?q=31.472194,74.283194&z=18&output=embed"
                   width="100%"
                   height="300"
                   style={{ border: 0 }}
