@@ -9,8 +9,9 @@ import {
   Activity,
   ArrowRight,
 } from 'lucide-react';
-import { services } from '@/data/services';
-import { specialties } from '@/data/specialties';
+import { services as defaultServices } from '@/data/services';
+import { specialties as defaultSpecialties } from '@/data/specialties';
+import { useCms } from '@/contexts/CmsContext';
 
 const navLinks = [
   { label: 'Home', to: '/' },
@@ -48,6 +49,10 @@ export default function Navbar() {
   }, [mobileOpen]);
 
   const solid = scrolled || location.pathname !== '/';
+
+  const cms = useCms();
+  const services = (cms?.services && cms.services.length > 0) ? cms.services : defaultServices;
+  const specialties = (cms?.specialties && cms.specialties.length > 0) ? cms.specialties : defaultSpecialties;
 
   return (
     <header

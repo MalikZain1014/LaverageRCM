@@ -29,11 +29,12 @@ import {
 import Seo from '@/components/Seo';
 import CtaBanner from '@/components/CtaBanner';
 import { Reveal, SectionHeader } from '@/components/ui';
-import { services } from '@/data/services';
-import { specialties } from '@/data/specialties';
-import { stats, testimonials, howWeWork, whyChooseItems } from '@/data/content';
-import { blogPosts } from '@/data/blog';
-import { faqs } from '@/data/faqs';
+import { services as defaultServices } from '@/data/services';
+import { specialties as defaultSpecialties } from '@/data/specialties';
+import { stats as defaultStats, testimonials as defaultTestimonials, howWeWork as defaultHowWeWork, whyChooseItems as defaultWhyChooseItems } from '@/data/content';
+import { blogPosts as defaultBlogPosts } from '@/data/blog';
+import { faqs as defaultFaqs } from '@/data/faqs';
+import { useCms } from '@/contexts/CmsContext';
 
 const floatingIcons = [
   { Icon: HeartPulse, className: 'top-[18%] left-[8%]', delay: '0s' },
@@ -45,6 +46,13 @@ const floatingIcons = [
 ];
 
 export default function HomePage() {
+  const cms = useCms();
+  const services = (cms?.services && cms.services.length > 0) ? cms.services : defaultServices;
+  const specialties = (cms?.specialties && cms.specialties.length > 0) ? cms.specialties : defaultSpecialties;
+  const testimonials = (cms?.testimonials && cms.testimonials.length > 0) ? cms.testimonials : defaultTestimonials;
+  const blogPosts = (cms?.blogs && cms.blogs.length > 0) ? cms.blogs : defaultBlogPosts;
+  const faqs = (cms?.faqs && cms.faqs.length > 0) ? cms.faqs : defaultFaqs;
+
   return (
     <>
       <Seo
@@ -100,18 +108,13 @@ function Hero() {
             Trusted by 500+ Healthcare Providers
           </motion.span>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.6 }}
-            className="mt-6 text-4xl font-extrabold leading-[1.1] text-white sm:text-5xl lg:text-6xl xl:text-7xl"
-          >
+          <h1 className="mt-6 text-4xl font-extrabold leading-[1.1] text-white sm:text-5xl lg:text-6xl xl:text-7xl animate-fade-in">
             Your Trusted Medical Billing &{' '}
             <span className="bg-gradient-to-r from-primary-400 via-accent-400 to-accent-500 bg-clip-text text-transparent">
               Revenue Cycle Management
             </span>{' '}
             Partner
-          </motion.h1>
+          </h1>
 
           <motion.p
             initial={{ opacity: 0, y: 24 }}

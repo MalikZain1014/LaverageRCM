@@ -3,9 +3,13 @@ import { ArrowRight } from 'lucide-react';
 import Seo from '@/components/Seo';
 import CtaBanner from '@/components/CtaBanner';
 import { PageHero, Reveal, SectionHeader } from '@/components/ui';
-import { specialties } from '@/data/specialties';
+import { specialties as defaultSpecialties } from '@/data/specialties';
+import { useCms } from '@/contexts/CmsContext';
 
 export default function SpecialtiesPage() {
+  const cms = useCms();
+  const specialties = (cms?.specialties && cms.specialties.length > 0) ? cms.specialties : defaultSpecialties;
+
   return (
     <>
       <Seo

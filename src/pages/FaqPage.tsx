@@ -3,11 +3,16 @@ import { Search, HelpCircle } from 'lucide-react';
 import Seo from '@/components/Seo';
 import CtaBanner from '@/components/CtaBanner';
 import { PageHero, Reveal, SectionHeader, Accordion } from '@/components/ui';
-import { faqs, faqCategories } from '@/data/faqs';
+import { faqs as defaultFaqs, faqCategories as defaultFaqCategories } from '@/data/faqs';
+import { useCms } from '@/contexts/CmsContext';
 
 export default function FaqPage() {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('All');
+
+  const cms = useCms();
+  const faqs = (cms?.faqs && cms.faqs.length > 0) ? cms.faqs : defaultFaqs;
+  const faqCategories = defaultFaqCategories;
 
   const filtered = useMemo(() => {
     return faqs.filter((item) => {
@@ -15,10 +20,10 @@ export default function FaqPage() {
       const matchesQuery =
         query.trim() === '' ||
         item.question.toLowerCase().includes(query.toLowerCase()) ||
-        item.answer.toLowerCase().includes(query.toLowerCase());
+        (item.answer || '').toLowerCase().includes(query.toLowerCase());
       return matchesCategory && matchesQuery;
     });
-  }, [query, category]);
+  }, [query, category, faqs]);
 
   return (
     <>

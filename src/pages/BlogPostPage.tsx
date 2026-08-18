@@ -4,10 +4,13 @@ import { ArrowLeft, ArrowRight, Calendar, Clock, User } from 'lucide-react';
 import Seo from '@/components/Seo';
 import CtaBanner from '@/components/CtaBanner';
 import { Reveal, SectionHeader } from '@/components/ui';
-import { blogPosts } from '@/data/blog';
+import { blogPosts as defaultBlogPosts } from '@/data/blog';
+import { useCms } from '@/contexts/CmsContext';
 
 export default function BlogPostPage() {
   const { slug } = useParams();
+  const cms = useCms();
+  const blogPosts = (cms?.blogs && cms.blogs.length > 0) ? cms.blogs : defaultBlogPosts;
   const post = blogPosts.find((p) => p.slug === slug);
 
   if (!post) {

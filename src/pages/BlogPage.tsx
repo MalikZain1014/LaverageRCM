@@ -5,7 +5,8 @@ import { Search, ArrowRight, FileText, Calendar, Clock } from 'lucide-react';
 import Seo from '@/components/Seo';
 import CtaBanner from '@/components/CtaBanner';
 import { PageHero, Reveal, SectionHeader } from '@/components/ui';
-import { blogPosts, blogCategories } from '@/data/blog';
+import { blogPosts as defaultBlogPosts, blogCategories as defaultBlogCategories } from '@/data/blog';
+import { useCms } from '@/contexts/CmsContext';
 
 const POSTS_PER_PAGE = 6;
 
@@ -14,18 +15,22 @@ export default function BlogPage() {
   const [category, setCategory] = useState('All');
   const [page, setPage] = useState(1);
 
+  const cms = useCms();
+  const blogPosts = (cms?.blogs && cms.blogs.length > 0) ? cms.blogs : defaultBlogPosts;
+  const blogCategories = defaultBlogCategories;
+
   const filtered = useMemo(() => {
     return blogPosts.filter((post) => {
       const matchesCategory = category === 'All' || post.category === category;
       const matchesQuery =
         query.trim() === '' ||
         post.title.toLowerCase().includes(query.toLowerCase()) ||
-        post.excerpt.toLowerCase().includes(query.toLowerCase());
+        (post.excerpt || '').toLowerCase().includes(query.toLowerCase());
       return matchesCategory && matchesQuery;
     });
-  }, [query, category]);
+  }, [query, category, blogPosts]);
 
-  const featured = blogPosts.find((p) => p.featured) || blogPosts[0];
+  const featured = blogPosts.find((p) => p.featured) || blogPosts[0] || { slug: '', title: '', excerpt: '', category: 'General', date: '', readTime: '' };
   const totalPages = Math.max(1, Math.ceil(filtered.length / POSTS_PER_PAGE));
   const currentPage = Math.min(page, totalPages);
   const paginated = filtered.slice((currentPage - 1) * POSTS_PER_PAGE, currentPage * POSTS_PER_PAGE);

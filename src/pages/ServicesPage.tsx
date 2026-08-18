@@ -3,9 +3,13 @@ import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import Seo from '@/components/Seo';
 import CtaBanner from '@/components/CtaBanner';
 import { PageHero, Reveal, SectionHeader } from '@/components/ui';
-import { services } from '@/data/services';
+import { services as defaultServices } from '@/data/services';
+import { useCms } from '@/contexts/CmsContext';
 
 export default function ServicesPage() {
+  const cms = useCms();
+  const services = (cms?.services && cms.services.length > 0) ? cms.services : defaultServices;
+
   return (
     <>
       <Seo
@@ -43,7 +47,7 @@ export default function ServicesPage() {
                   </h3>
                   <p className="relative mt-2 flex-1 text-sm leading-relaxed text-slatey-600">{s.short}</p>
                   <ul className="relative mt-4 space-y-1.5">
-                    {s.benefits.slice(0, 3).map((b) => (
+                    {s.benefits?.slice(0, 3).map((b: any) => (
                       <li key={b} className="flex items-start gap-2 text-xs text-slatey-500">
                         <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent-500" />
                         {b}

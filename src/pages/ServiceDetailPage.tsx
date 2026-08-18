@@ -14,10 +14,13 @@ import {
 import Seo from '@/components/Seo';
 import CtaBanner from '@/components/CtaBanner';
 import { PageHero, Reveal, SectionHeader, Accordion } from '@/components/ui';
-import { services } from '@/data/services';
+import { services as defaultServices } from '@/data/services';
+import { useCms } from '@/contexts/CmsContext';
 
 export default function ServiceDetailPage() {
   const { slug } = useParams();
+  const cms = useCms();
+  const services = (cms?.services && cms.services.length > 0) ? cms.services : defaultServices;
   const service = services.find((s) => s.slug === slug);
 
   if (!service) {

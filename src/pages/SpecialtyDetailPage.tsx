@@ -13,10 +13,13 @@ import {
 import Seo from '@/components/Seo';
 import CtaBanner from '@/components/CtaBanner';
 import { PageHero, Reveal, SectionHeader, Accordion } from '@/components/ui';
-import { specialties } from '@/data/specialties';
+import { specialties as defaultSpecialties } from '@/data/specialties';
+import { useCms } from '@/contexts/CmsContext';
 
 export default function SpecialtyDetailPage() {
   const { slug } = useParams();
+  const cms = useCms();
+  const specialties = (cms?.specialties && cms.specialties.length > 0) ? cms.specialties : defaultSpecialties;
   const specialty = specialties.find((s) => s.slug === slug);
 
   if (!specialty) {

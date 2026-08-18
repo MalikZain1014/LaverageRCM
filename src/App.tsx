@@ -45,6 +45,8 @@ import SettingsPage from '@/admin/pages/SettingsPage';
 import UsersPage from '@/admin/pages/UsersPage';
 import ProfilePage from '@/admin/pages/ProfilePage';
 
+import { CmsProvider } from '@/contexts/CmsContext';
+
 export default function App() {
   return (
     <ErrorBoundary>
@@ -86,29 +88,31 @@ export default function App() {
 
                 {/* Public website routes */}
                 <Route path="/*" element={
-                  <div className="flex min-h-screen flex-col">
-                    <Navbar />
-                    <main className="flex-1">
-                      <Routes>
-                        <Route path="/" element={<HomePage />} />
-                        <Route path="/about" element={<AboutPage />} />
-                        <Route path="/services" element={<ServicesPage />} />
-                        <Route path="/services/:slug" element={<ServiceDetailPage />} />
-                        <Route path="/specialties" element={<SpecialtiesPage />} />
-                        <Route path="/specialties/:slug" element={<SpecialtyDetailPage />} />
-                        <Route path="/why-choose-us" element={<WhyChooseUsPage />} />
-                        <Route path="/blog" element={<BlogPage />} />
-                        <Route path="/blog/:slug" element={<BlogPostPage />} />
-                        <Route path="/faq" element={<FaqPage />} />
-                        <Route path="/contact" element={<ContactPage />} />
-                        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-                        <Route path="/terms" element={<TermsPage />} />
-                        <Route path="/cookies" element={<CookiesPage />} />
-                        <Route path="*" element={<NotFoundPage />} />
-                      </Routes>
-                    </main>
-                    <Footer />
-                  </div>
+                  <CmsProvider>
+                    <div className="flex min-h-screen flex-col">
+                      <Navbar />
+                      <main className="flex-1">
+                        <Routes>
+                          <Route path="/" element={<HomePage />} />
+                          <Route path="/about" element={<AboutPage />} />
+                          <Route path="/services" element={<ServicesPage />} />
+                          <Route path="/services/:slug" element={<ServiceDetailPage />} />
+                          <Route path="/specialties" element={<SpecialtiesPage />} />
+                          <Route path="/specialties/:slug" element={<SpecialtyDetailPage />} />
+                          <Route path="/why-choose-us" element={<WhyChooseUsPage />} />
+                          <Route path="/blog" element={<BlogPage />} />
+                          <Route path="/blog/:slug" element={<BlogPostPage />} />
+                          <Route path="/faq" element={<FaqPage />} />
+                          <Route path="/contact" element={<ContactPage />} />
+                          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+                          <Route path="/terms" element={<TermsPage />} />
+                          <Route path="/cookies" element={<CookiesPage />} />
+                          <Route path="*" element={<NotFoundPage />} />
+                        </Routes>
+                      </main>
+                      <Footer />
+                    </div>
+                  </CmsProvider>
                 } />
               </Routes>
             </ThemeProvider>
