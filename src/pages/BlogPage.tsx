@@ -5,14 +5,17 @@ import { Search, ArrowRight, FileText, Calendar, Clock } from 'lucide-react';
 import Seo from '@/components/Seo';
 import CtaBanner from '@/components/CtaBanner';
 import { PageHero, Reveal, SectionHeader } from '@/components/ui';
-import { blogPosts, blogCategories } from '@/data/blog';
+import { usePublicContent } from '@/context/PublicContentContext';
 
 const POSTS_PER_PAGE = 6;
 
 export default function BlogPage() {
+  const { blogPosts } = usePublicContent();
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('All');
   const [page, setPage] = useState(1);
+
+  const blogCategories = ['All', ...Array.from(new Set(blogPosts.map((post) => post.category)))];
 
   const filtered = useMemo(() => {
     return blogPosts.filter((post) => {
@@ -45,7 +48,7 @@ export default function BlogPage() {
       />
 
       {/* Featured */}
-      <section className="section bg-white">
+      {featured && <section className="section bg-white">
         <div className="container-px">
           <Reveal>
             <Link
@@ -77,7 +80,7 @@ export default function BlogPage() {
             </Link>
           </Reveal>
         </div>
-      </section>
+      </section>}
 
       {/* Search + Categories + Grid */}
       <section className="section bg-slatey-50">

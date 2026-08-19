@@ -3,9 +3,10 @@ import { ArrowRight } from 'lucide-react';
 import Seo from '@/components/Seo';
 import CtaBanner from '@/components/CtaBanner';
 import { PageHero, Reveal, SectionHeader } from '@/components/ui';
-import { specialties } from '@/data/specialties';
+import { usePublicContent } from '@/context/PublicContentContext';
 
 export default function SpecialtiesPage() {
+  const { specialties } = usePublicContent();
   return (
     <>
       <Seo

@@ -200,7 +200,7 @@ export default function AboutPage() {
           <SectionHeader
             eyebrow="Our Journey"
             title={<>A decade of revenue cycle excellence</>}
-            subtitle="From our founding to serving 500+ providers, here is how LeverageRCM has grown."
+            subtitle="From our founding to serving 50+ providers, here is how LeverageRCM has grown."
           />
           <div className="relative mt-16">
             <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-500 to-accent-500 md:left-1/2" />

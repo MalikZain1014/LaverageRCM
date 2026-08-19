@@ -29,11 +29,8 @@ import {
 import Seo from '@/components/Seo';
 import CtaBanner from '@/components/CtaBanner';
 import { Reveal, SectionHeader } from '@/components/ui';
-import { services } from '@/data/services';
-import { specialties } from '@/data/specialties';
-import { stats, testimonials, howWeWork, whyChooseItems } from '@/data/content';
-import { blogPosts } from '@/data/blog';
-import { faqs } from '@/data/faqs';
+import { stats, howWeWork, whyChooseItems } from '@/data/content';
+import { usePublicContent } from '@/context/PublicContentContext';
 
 const floatingIcons = [
   { Icon: HeartPulse, className: 'top-[18%] left-[8%]', delay: '0s' },
@@ -97,7 +94,7 @@ function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-400 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-400" />
             </span>
-            Trusted by 500+ Healthcare Providers
+            Trusted by 50+ Healthcare Providers
           </motion.span>
 
           <motion.h1
@@ -180,6 +177,8 @@ function Stats() {
 }
 
 function ServicesOverview() {
+  const { services } = usePublicContent();
+
   return (
     <section className="section bg-white">
       <div className="container-px">
@@ -264,6 +263,8 @@ function WhyChoosePreview() {
 }
 
 function SpecialtiesPreview() {
+  const { specialties } = usePublicContent();
+
   return (
     <section className="section bg-white">
       <div className="container-px">
@@ -333,6 +334,8 @@ function HowWeWork() {
 }
 
 function Testimonials() {
+  const { testimonials } = usePublicContent();
+
   return (
     <section className="section bg-slatey-50">
       <div className="container-px">
@@ -371,6 +374,8 @@ function Testimonials() {
 }
 
 function BlogPreview() {
+  const { blogPosts } = usePublicContent();
+
   const featured = blogPosts.filter((p) => p.featured).slice(0, 2);
   const recent = blogPosts.filter((p) => !p.featured).slice(0, 3);
   return (
@@ -440,6 +445,8 @@ function BlogPreview() {
 }
 
 function FaqPreview() {
+  const { faqs } = usePublicContent();
+
   const previewFaqs = faqs.slice(0, 6);
   return (
     <section className="section bg-slatey-50">

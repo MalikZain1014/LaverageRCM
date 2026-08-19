@@ -50,7 +50,7 @@ function customFetch(url: string, options?: RequestInit): Promise<Response> {
  * Setup connection error monitoring
  */
 export function setupSupabaseMonitoring() {
-  supabase.auth.onAuthStateChange((event, session) => {
+  const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
     if (event === 'SIGNED_OUT') {
       console.log('User signed out');
     } else if (event === 'SIGNED_IN') {
@@ -64,4 +64,6 @@ export function setupSupabaseMonitoring() {
       supabase.realtime.setAuth(session.access_token);
     }
   });
+
+  return () => listener.subscription.unsubscribe();
 }

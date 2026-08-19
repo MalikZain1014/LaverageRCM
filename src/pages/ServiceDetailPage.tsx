@@ -14,10 +14,11 @@ import {
 import Seo from '@/components/Seo';
 import CtaBanner from '@/components/CtaBanner';
 import { PageHero, Reveal, SectionHeader, Accordion } from '@/components/ui';
-import { services } from '@/data/services';
+import { usePublicContent } from '@/context/PublicContentContext';
 
 export default function ServiceDetailPage() {
   const { slug } = useParams();
+  const { services } = usePublicContent();
   const service = services.find((s) => s.slug === slug);
 
   if (!service) {

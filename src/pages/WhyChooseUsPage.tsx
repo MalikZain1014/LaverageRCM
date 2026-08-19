@@ -119,7 +119,7 @@ export default function WhyChooseUsPage() {
 
       <CtaBanner
         title="Experience the LeverageRCM difference"
-        subtitle="Join 500+ providers who trust us with their revenue cycle. Book your free consultation today."
+        subtitle="Join 50+ providers who trust us with their revenue cycle. Book your free consultation today."
       />
     </>
   );

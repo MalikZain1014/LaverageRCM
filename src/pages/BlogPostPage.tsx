@@ -4,10 +4,11 @@ import { ArrowLeft, ArrowRight, Calendar, Clock, User } from 'lucide-react';
 import Seo from '@/components/Seo';
 import CtaBanner from '@/components/CtaBanner';
 import { Reveal, SectionHeader } from '@/components/ui';
-import { blogPosts } from '@/data/blog';
+import { usePublicContent } from '@/context/PublicContentContext';
 
 export default function BlogPostPage() {
   const { slug } = useParams();
+  const { blogPosts } = usePublicContent();
   const post = blogPosts.find((p) => p.slug === slug);
 
   if (!post) {

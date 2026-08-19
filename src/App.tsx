@@ -44,6 +44,7 @@ import SeoPage from '@/admin/pages/SeoPage';
 import SettingsPage from '@/admin/pages/SettingsPage';
 import UsersPage from '@/admin/pages/UsersPage';
 import ProfilePage from '@/admin/pages/ProfilePage';
+import { PublicContentProvider } from '@/context/PublicContentContext';
 
 export default function App() {
   return (
@@ -86,10 +87,11 @@ export default function App() {
 
                 {/* Public website routes */}
                 <Route path="/*" element={
-                  <div className="flex min-h-screen flex-col">
-                    <Navbar />
-                    <main className="flex-1">
-                      <Routes>
+                  <PublicContentProvider>
+                    <div className="flex min-h-screen flex-col">
+                      <Navbar />
+                      <main className="flex-1">
+                        <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/about" element={<AboutPage />} />
                         <Route path="/services" element={<ServicesPage />} />
@@ -105,10 +107,11 @@ export default function App() {
                         <Route path="/terms" element={<TermsPage />} />
                         <Route path="/cookies" element={<CookiesPage />} />
                         <Route path="*" element={<NotFoundPage />} />
-                      </Routes>
-                    </main>
-                    <Footer />
-                  </div>
+                        </Routes>
+                      </main>
+                      <Footer />
+                    </div>
+                  </PublicContentProvider>
                 } />
               </Routes>
             </ThemeProvider>

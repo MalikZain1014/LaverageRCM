@@ -3,11 +3,13 @@ import { Search, HelpCircle } from 'lucide-react';
 import Seo from '@/components/Seo';
 import CtaBanner from '@/components/CtaBanner';
 import { PageHero, Reveal, SectionHeader, Accordion } from '@/components/ui';
-import { faqs, faqCategories } from '@/data/faqs';
+import { usePublicContent } from '@/context/PublicContentContext';
 
 export default function FaqPage() {
+  const { faqs } = usePublicContent();
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('All');
+  const faqCategories = ['All', ...Array.from(new Set(faqs.map((faq) => faq.category)))];
 
   const filtered = useMemo(() => {
     return faqs.filter((item) => {

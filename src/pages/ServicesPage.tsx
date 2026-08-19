@@ -3,9 +3,10 @@ import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import Seo from '@/components/Seo';
 import CtaBanner from '@/components/CtaBanner';
 import { PageHero, Reveal, SectionHeader } from '@/components/ui';
-import { services } from '@/data/services';
+import { usePublicContent } from '@/context/PublicContentContext';
 
 export default function ServicesPage() {
+  const { services } = usePublicContent();
   return (
     <>
       <Seo

@@ -11,11 +11,11 @@ import {
   ArrowRight,
   CheckCircle2,
 } from 'lucide-react';
-import { services } from '@/data/services';
-import { specialties } from '@/data/specialties';
+import { usePublicContent } from '@/context/PublicContentContext';
 import { useState } from 'react';
 
 export default function Footer() {
+  const { services, specialties } = usePublicContent();
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 

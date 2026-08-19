@@ -6,7 +6,7 @@ export interface Stat {
 export const stats: Stat[] = [
   { value: '12+', label: 'Years Experience' },
   { value: '98%', label: 'Clean Claim Rate' },
-  { value: '500+', label: 'Healthcare Providers' },
+  { value: '50+', label: 'Healthcare Providers' },
   { value: '99%', label: 'Client Satisfaction' },
   { value: 'USA & UK', label: 'Healthcare Expertise' },
   { value: '24/7', label: 'Dedicated Support' },
@@ -75,7 +75,7 @@ export const timeline: TimelineEvent[] = [
   { year: '2016', title: 'Expanded Specialties', detail: 'Added specialty-specific coding teams covering cardiology, dermatology, orthopaedics, and more.' },
   { year: '2018', title: 'UK Operations', detail: 'Opened operations in the United Kingdom to serve the NHS private practice market.' },
   { year: '2020', title: 'Telehealth Expertise', detail: 'Developed dedicated telehealth billing workflows during the rapid expansion of virtual care.' },
-  { year: '2022', title: '500+ Providers', detail: 'Reached 500+ healthcare providers served across the USA and UK.' },
+  { year: '2022', title: '50+ Providers', detail: 'Reached 50+ healthcare providers served across the USA and UK.' },
   { year: '2024', title: 'AI-Enhanced RCM', detail: 'Integrated AI-assisted claim scrubbing and denial prediction into our revenue cycle platform.' },
   { year: '2026', title: '98% Clean Claim Rate', detail: 'Achieved a 98% clean claim rate across all clients through continuous process improvement.' },
 ];

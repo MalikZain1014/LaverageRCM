@@ -31,7 +31,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     let mounted = true;
 
     // Setup Supabase monitoring
-    setupSupabaseMonitoring();
+    const stopSupabaseMonitoring = setupSupabaseMonitoring();
 
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -67,6 +67,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => {
       mounted = false;
       listener.subscription.unsubscribe();
+      stopSupabaseMonitoring();
     };
   }, []);
 

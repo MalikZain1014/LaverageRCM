@@ -13,10 +13,11 @@ import {
 import Seo from '@/components/Seo';
 import CtaBanner from '@/components/CtaBanner';
 import { PageHero, Reveal, SectionHeader, Accordion } from '@/components/ui';
-import { specialties } from '@/data/specialties';
+import { usePublicContent } from '@/context/PublicContentContext';
 
 export default function SpecialtyDetailPage() {
   const { slug } = useParams();
+  const { specialties } = usePublicContent();
   const specialty = specialties.find((s) => s.slug === slug);
 
   if (!specialty) {

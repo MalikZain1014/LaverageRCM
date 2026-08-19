@@ -9,8 +9,7 @@ import {
   Activity,
   ArrowRight,
 } from 'lucide-react';
-import { services } from '@/data/services';
-import { specialties } from '@/data/specialties';
+import { usePublicContent } from '@/context/PublicContentContext';
 
 const navLinks = [
   { label: 'Home', to: '/' },
@@ -21,6 +20,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const { services, specialties } = usePublicContent();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSection, setMobileSection] = useState<
