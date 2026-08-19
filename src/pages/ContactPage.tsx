@@ -154,7 +154,7 @@ export default function ContactPage() {
               </div>
             </Reveal>
 
-            <Reveal delay={0.2}>
+           <Reveal delay={0.2}>
               <div className="overflow-hidden rounded-3xl ring-1 ring-slatey-200/70 shadow-premium">
                 <iframe
                   title="LeverageRCM Exact Office Location"
