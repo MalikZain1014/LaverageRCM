@@ -7,7 +7,9 @@ import {
 import type { BlogPost as CmsBlogPost, Faq as CmsFaq, Service as CmsService, Specialty as CmsSpecialty, Testimonial as CmsTestimonial } from '@/admin/types';
 import type { ServiceDetail } from '@/data/services';
 import type { SpecialtyDetail } from '@/data/specialties';
-import { supabase } from '@/admin/services/supabaseClient';
+import { publicContentService } from '@/services/publicContentService';
+import { publicSupabase } from '@/lib/publicSupabase';
+import { blogContentToHtml } from '@/utils/blogContent';
 
 const iconMap: Record<string, LucideIcon> = {
   Activity, AlertTriangle, BadgeCheck, Bone, Brain, ClipboardCheck, Code2, FileText,
@@ -25,7 +27,7 @@ export interface PublicBlogPost {
   date: string;
   readTime: string;
   featured?: boolean;
-  content: string[];
+  content: string;
 }
 
 export interface PublicFaq { id: string; category: string; question: string; answer: string; }
@@ -61,7 +63,7 @@ function mapSpecialty(row: CmsSpecialty): SpecialtyDetail {
 function mapBlog(row: CmsBlogPost): PublicBlogPost {
   return {
     id: row.id, slug: row.slug, title: row.title, excerpt: row.excerpt, category: row.category, author: row.author,
-    date: (row.published_at || row.created_at).slice(0, 10), readTime: row.read_time, featured: row.featured, content: row.content || [],
+    date: (row.published_at || row.created_at).slice(0, 10), readTime: row.read_time, featured: row.featured, content: blogContentToHtml(row.content),
   };
 }
 
@@ -74,31 +76,60 @@ export function PublicContentProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let active = true;
+    const reportError = (contentType: string, error: unknown) => {
+      console.error(`Failed to load public ${contentType}:`, error);
+    };
+
     const load = async () => {
-      const [services, specialties, blogs, faqs, testimonials] = await Promise.all([
-        supabase.from('cms_services').select('*').eq('status', 'published').order('display_order'),
-        supabase.from('cms_specialties').select('*').eq('status', 'published').order('display_order'),
-        supabase.from('cms_blogs').select('*').eq('status', 'published').order('published_at', { ascending: false, nullsFirst: false }),
-        supabase.from('cms_faqs').select('*').eq('status', 'published').order('sort_order'),
-        supabase.from('cms_testimonials').select('*').eq('status', 'published').order('created_at', { ascending: false }),
-      ]);
-      const errors = [services, specialties, blogs, faqs, testimonials].map((result) => result.error).filter(Boolean);
-      if (errors.length) { console.error('Failed to load public content:', errors[0]); return; }
-      if (active) setContent({
-        services: (services.data as CmsService[]).map(mapService), specialties: (specialties.data as CmsSpecialty[]).map(mapSpecialty),
-        blogPosts: (blogs.data as CmsBlogPost[]).map(mapBlog), faqs: (faqs.data as CmsFaq[]).map((row) => ({ id: row.id, category: row.category, question: row.question, answer: row.answer })),
-        testimonials: (testimonials.data as CmsTestimonial[]).map(mapTestimonial),
-      });
+      const loadServices = async () => {
+        try {
+          const data = await publicContentService.listPublishedServices();
+          if (active) setContent((current) => ({ ...current, services: data.map(mapService) }));
+        } catch (error) { reportError('services', error); }
+      };
+
+      const loadSpecialties = async () => {
+        try {
+          const data = await publicContentService.listPublishedSpecialties();
+          if (active) setContent((current) => ({ ...current, specialties: data.map(mapSpecialty) }));
+        } catch (error) { reportError('specialties', error); }
+      };
+
+      const loadBlogs = async () => {
+        try {
+          const data = await publicContentService.listPublishedBlogs();
+          if (active) setContent((current) => ({ ...current, blogPosts: data.map(mapBlog) }));
+        } catch (error) { reportError('blogs', error); }
+      };
+
+      const loadFaqs = async () => {
+        try {
+          const data = await publicContentService.listPublishedFaqs();
+          if (active) setContent((current) => ({
+            ...current,
+            faqs: data.map((row) => ({ id: row.id, category: row.category, question: row.question, answer: row.answer })),
+          }));
+        } catch (error) { reportError('faqs', error); }
+      };
+
+      const loadTestimonials = async () => {
+        try {
+          const data = await publicContentService.listPublishedTestimonials();
+          if (active) setContent((current) => ({ ...current, testimonials: data.map(mapTestimonial) }));
+        } catch (error) { reportError('testimonials', error); }
+      };
+
+      await Promise.all([loadServices(), loadSpecialties(), loadBlogs(), loadFaqs(), loadTestimonials()]);
     };
     load();
-    const channel = supabase.channel('public-content-sync')
+    const channel = publicSupabase.channel('public-content-sync')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'cms_services' }, load)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'cms_specialties' }, load)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'cms_blogs' }, load)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'cms_faqs' }, load)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'cms_testimonials' }, load)
       .subscribe();
-    return () => { active = false; supabase.removeChannel(channel); };
+    return () => { active = false; publicSupabase.removeChannel(channel); };
   }, []);
 
   return <PublicContentContext.Provider value={content}>{children}</PublicContentContext.Provider>;

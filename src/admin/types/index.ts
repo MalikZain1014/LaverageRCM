@@ -62,7 +62,7 @@ export interface BlogPost {
   title: string;
   slug: string;
   excerpt: string;
-  content: string[];
+  content: string;
   category: string;
   tags: string[];
   author: string;

@@ -1,5 +1,4 @@
 import { Link, useParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Calendar, Clock, User } from 'lucide-react';
 import Seo from '@/components/Seo';
 import CtaBanner from '@/components/CtaBanner';
@@ -76,13 +75,10 @@ export default function BlogPostPage() {
               <p className="text-sm uppercase tracking-wider text-white/80">LeverageRCM Insights</p>
               <p className="mt-2 text-2xl font-bold">{post.category}</p>
             </div>
-            <div className="space-y-6">
-              {post.content.map((paragraph, i) => (
-                <Reveal key={i} delay={i * 0.04}>
-                  <p className={`text-slatey-700 leading-relaxed ${i === 0 ? 'text-lg' : 'text-base'}`}>{paragraph}</p>
-                </Reveal>
-              ))}
-            </div>
+            <div
+              className="blog-content text-slatey-700 leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            />
           </div>
         </div>
       </section>

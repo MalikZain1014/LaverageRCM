@@ -9,9 +9,10 @@ import { blogService } from '@/admin/services/api';
 import { useAuth } from '@/admin/contexts/AuthContext';
 import { BLOG_CATEGORIES } from '@/admin/constants';
 import type { BlogPost } from '@/admin/types';
+import { blogContentToHtml } from '@/utils/blogContent';
 
 const empty: Partial<BlogPost> = {
-  title: '', slug: '', excerpt: '', content: [], category: BLOG_CATEGORIES[0],
+  title: '', slug: '', excerpt: '', content: '', category: BLOG_CATEGORIES[0],
   tags: [], author: '', featured_image_url: '', gallery: [], read_time: '5 min read',
   seo: { title: '', description: '' }, status: 'draft', featured: false, published_at: null,
 };
@@ -30,7 +31,7 @@ export default function BlogEditorPage() {
   useEffect(() => {
     if (!id) return;
     blogService.get(id).then(b => {
-      if (b) { setData(b); setContentHtml((b.content as string[]).join('\n\n')); }
+      if (b) { setData(b); setContentHtml(blogContentToHtml(b.content)); }
       setLoading(false);
     });
   }, [id]);
@@ -44,8 +45,7 @@ export default function BlogEditorPage() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (!data.title || !data.slug) { toast.error('Title and slug are required'); return; }
-    const paragraphs = contentHtml.split(/\n\n+/).filter(p => p.trim());
-    const payload = { ...data, content: paragraphs };
+    const payload = { ...data, content: contentHtml };
     setSaving(true);
     try {
       if (isEdit && id) { await blogService.update(id, payload, profile?.email || ''); toast.success('Blog post updated'); }

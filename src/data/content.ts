@@ -8,7 +8,7 @@ export const stats: Stat[] = [
   { value: '98%', label: 'Clean Claim Rate' },
   { value: '50+', label: 'Healthcare Providers' },
   { value: '99%', label: 'Client Satisfaction' },
-  { value: 'USA & UK', label: 'Healthcare Expertise' },
+  { value: 'USA', label: 'Healthcare Expertise' },
   { value: '24/7', label: 'Dedicated Support' },
 ];
 
@@ -115,20 +115,76 @@ export interface WhyChooseItem {
 }
 
 export const whyChooseItems: WhyChooseItem[] = [
-  { title: 'Experienced Professionals', detail: 'Our teams bring decades of combined healthcare revenue cycle experience across every major specialty.' },
-  { title: 'Certified Billing Specialists', detail: 'Every billing specialist is trained and certified, ensuring your claims are handled by qualified experts.' },
-  { title: 'Certified Medical Coders', detail: 'AAPC and AHIMA certified coders with specialty credentials translate your documentation into accurate codes.' },
-  { title: 'USA & UK Expertise', detail: 'We understand the payer environments, regulations, and coding standards of both the US and UK markets.' },
-  { title: 'Professional Practice Support', detail: 'Tailored RCM for independent physicians, group practices, and multi-specialty clinics of every size.' },
-  { title: 'Institutional Practice Support', detail: 'Scalable billing and coding for hospitals, surgery centers, and large healthcare organizations.' },
-  { title: 'HIPAA Awareness', detail: 'Workforce training, secure access, and audit-ready processes protect patient data at every step.' },
-  { title: 'Revenue Optimization', detail: 'We do not just process claims — we actively find ways to increase your collections and reduce leakage.' },
-  { title: 'Clean Claims', detail: 'Our 98% clean claim rate means faster payment, fewer denials, and less rework for your team.' },
-  { title: 'Fast Turnaround', detail: 'Same-day payment posting and rapid claim submission keep your cash flow healthy and predictable.' },
-  { title: 'Transparent Communication', detail: 'Clear reporting, monthly reviews, and a dedicated account manager keep you informed at all times.' },
-  { title: 'Dedicated Account Managers', detail: 'A single point of contact who knows your specialty, your payers, and your goals.' },
-  { title: 'Modern Technology', detail: 'AI-assisted claim scrubbing, denial prediction, and real-time dashboards powered by modern tools.' },
-  { title: 'Data Security', detail: 'Encrypted access, role-based permissions, and activity logging keep your practice data secure.' },
+  {
+    title: 'Experienced Professionals',
+    detail:
+      'Join a team who is aware of the operational and financial issues that arise from medical billing and managing the revenue cycle.',
+  },
+  {
+    title: 'Certified Billing Specialists',
+    detail:
+      'Our billing experts follow organized workflows to ensure accurate claims, prompt follow-up and a more efficient reimbursement process for the practice.',
+  },
+  {
+    title: 'Certified Medical Coders',
+    detail:
+      'AAPC and AHIMA-certified coders assist convert clinical documents into precise CPT, HCPCS, as well as ICD-10-CM code.',
+  },
+  {
+    title: 'USA Expertise',
+    detail:
+      'Our team is familiar with the requirements of payers in terms of billing requirements, standards for billing, as well as reimbursement workflows in both U.S healthcare markets.',
+  },
+  {
+    title: 'Professional Practice Support',
+    detail:
+      'Flexible RCM assistance for independent doctors or group practices as well as multi-specialty clinics that want to increase the efficiency of billing.',
+  },
+  {
+    title: 'Institutional Practice Support',
+    detail:
+      'Support for scaling billing and coding specifically designed for hospitals, surgical centers and other larger healthcare organizations with complicated revenues cycles.',
+  },
+  {
+    title: 'HIPAA Awareness',
+    detail:
+      'Workforce training, secure access, and audit-ready processes protect patient data at every step.',
+  },
+  {
+    title: 'Revenue Optimization',
+    detail:
+      'We do not just process claims — we actively find ways to increase your collections and reduce leakage.',
+  },
+  {
+    title: 'Clean Claims',
+    detail:
+      'Our 98% clean claim rate means faster payment, fewer denials, and less rework for your team.',
+  },
+  {
+    title: 'Fast Turnaround',
+    detail:
+      'Same-day payment posting and rapid claim submission keep your cash flow healthy and predictable.',
+  },
+  {
+    title: 'Transparent Communication',
+    detail:
+      'Clear reporting, monthly reviews, and a dedicated account manager keep you informed at all times.',
+  },
+  {
+    title: 'Dedicated Account Managers',
+    detail:
+      'A single point of contact who knows your specialty, your payers, and your goals.',
+  },
+  {
+    title: 'Modern Technology',
+    detail:
+      'AI-assisted claim scrubbing, denial prediction, and real-time dashboards powered by modern tools.',
+  },
+  {
+    title: 'Data Security',
+    detail:
+      'Encrypted access, role-based permissions, and activity logging keep your practice data secure.',
+  },
 ];
 
 export interface HowWeWorkStep {

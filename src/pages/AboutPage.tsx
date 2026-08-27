@@ -156,14 +156,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* USA & UK Expertise + Practice types */}
+      {/* USA Expertise + Practice types */}
       <section className="section bg-white">
         <div className="container-px">
           <div className="grid gap-6 lg:grid-cols-3">
             <Reveal>
               <div className="h-full rounded-2xl bg-gradient-to-br from-navy-800 to-navy-900 p-8 text-white">
                 <Globe2 className="h-10 w-10 text-accent-400" />
-                <h3 className="mt-4 text-xl font-bold">USA & UK Expertise</h3>
+                <h3 className="mt-4 text-xl font-bold">USA Expertise</h3>
                 <p className="mt-2 text-sm text-slatey-300 leading-relaxed">
                   We understand the payer environments, regulations, and coding standards of both the US and UK
                   markets — and tailor our approach accordingly.
