@@ -9,6 +9,7 @@ import {
   CheckCircle2,
   Building2,
   Globe2,
+  MessageCircle,
   MessageSquare,
 } from 'lucide-react';
 import Seo from '@/components/Seo';
@@ -128,7 +129,8 @@ export default function ContactPage() {
               <div className="rounded-3xl bg-navy-900 p-8 text-white">
                 <h3 className="text-lg font-bold text-white">Contact Information</h3>
                 <div className="mt-6 space-y-5">
-                  <ContactRow icon={Phone} label="Phone" value="+92 343 2858901" href="tel:+92 343 2858901" />
+                  <ContactRow icon={Phone} label="Phone" value="+1 (442) 236-6240" href="tel:+1 (442) 236-6240" />
+                  <ContactRow  icon={MessageCircle}  label="WhatsApp"  value="+92 343 2858901"  href="https://wa.me/923432858901"/>
                   <ContactRow icon={Mail} label="Email" value="info@leveragercm.com" href="mailto:info@leveragercm.com" />
                   <ContactRow icon={Clock} label="Business Hours" value="Mon–Fri: 8am–8pm · 24/7 Support Available" />
                   <ContactRow icon={MapPin} label="Offices" value="437G, G Block, Johar town Lahore" />

@@ -163,7 +163,7 @@ export default function Navbar() {
         {/* Desktop Right Side */}
         <div className="hidden lg:flex items-center gap-4">
           <a
-            href="tel:+92 343 2858901"
+            href="tel:+1 (442) 236-6240"
             className={`flex items-center gap-2 text-sm font-semibold transition-colors ${
               solid
                 ? 'text-slatey-700 hover:text-primary-700'
@@ -174,7 +174,7 @@ export default function Navbar() {
               <Phone className="h-4 w-4" />
             </span>
 
-            +92 343 2858901
+            +1 (442) 236-6240
           </a>
 
           <Link to="/contact" className="btn-primary">
@@ -269,11 +269,11 @@ export default function Navbar() {
               {/* Mobile Contact Buttons */}
               <div className="pt-4 space-y-3">
                 <a
-                  href="tel:+92 343 2858901"
+                  href="tel:+1 (442) 236-6240"
                   className="flex items-center justify-center gap-2 rounded-full bg-primary-50 px-4 py-3 text-sm font-semibold text-primary-700"
                 >
                   <Phone className="h-4 w-4" />
-                  +92 343 2858901
+                  +1 (442) 236-6240
                 </a>
 
                 <Link

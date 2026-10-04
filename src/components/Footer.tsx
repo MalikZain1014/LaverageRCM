@@ -10,6 +10,7 @@ import {
   Instagram,
   ArrowRight,
   CheckCircle2,
+  MessageCircle,
 } from 'lucide-react';
 import { usePublicContent } from '@/context/PublicContentContext';
 import { useState } from 'react';
@@ -82,10 +83,14 @@ export default function Footer() {
               across the USA and UK maximize revenue through accurate billing, coding, and complete RCM services.
             </p>
             <div className="mt-6 space-y-2.5 text-sm">
-              <a href="tel:+92 343 2858901" className="flex items-center gap-3 text-slatey-400 hover:text-white transition-colors">
-                <Phone className="h-4 w-4 text-primary-500" /> +92 343 2858901
+              <a  href="tel:+14422366240"  className="flex items-center gap-3 text-slatey-400 hover:text-white transition-colors">
+                <Phone className="h-4 w-4 text-primary-500" /> +1 (442) 236-6240
               </a>
-              <a href="mailto:info@leveragercm.com" className="flex items-center gap-3 text-slatey-400 hover:text-white transition-colors">
+              <a
+                href="https://wa.me/923432858901" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-slatey-400 hover:text-white transition-colors">
+                <MessageCircle className="h-4 w-4 text-primary-500" /> +92 343 2858901
+              </a>
+              <a  href="mailto:info@leveragercm.com"  aria-label="Email LeverageRCM"  className="flex items-center gap-3 text-slatey-400 hover:text-white transition-colors">
                 <Mail className="h-4 w-4 text-primary-500" /> info@leveragercm.com
               </a>
               <div className="flex items-center gap-3 text-slatey-400">

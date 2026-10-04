@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Phone } from 'lucide-react';
+import { ArrowRight, MessageCircle, Phone } from 'lucide-react';
 
 export default function CtaBanner({
   title = 'Ready to maximize your practice revenue?',
@@ -56,11 +56,19 @@ export default function CtaBanner({
               {primaryLabel} <ArrowRight className="h-4 w-4" />
             </Link>
             <a
-              href="tel:+92 343 2858901"
+              href="tel:+1 (442) 236-6240"
               className="btn bg-white/10 text-white ring-1 ring-white/20 hover:bg-white/20 px-7 py-3.5 text-base"
             >
-              <Phone className="h-4 w-4" /> +92 343 2858901
+              <Phone className="h-4 w-4" /> +1 (442) 236-6240
             </a>
+             <a
+                href="https://wa.me/923432858901"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn bg-white/10 text-white ring-1 ring-white/20 hover:bg-white/20 px-7 py-3.5 text-base"
+              >
+                <MessageCircle className="h-4 w-4" /> +92 343 2858901
+              </a>
           </motion.div>
         </div>
       </motion.div>
